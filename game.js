@@ -9,7 +9,21 @@ var robot = {
 	x: 10,
 	y: 10,
 	width: 20,
-	height: 20
+	height: 20,
+	draw: function(){
+		context.fillRect(this.x, this.y, this.width, this.height)
+	},
+	update: function(){
+		if(keys[38]) this.y-=speed;
+		if(keys[40]) this.y+=speed;
+		if(keys[37]) this.x-=speed;
+		if(keys[39]) this.x+=speed;
+
+		if(this.x < 0) this.x = 0;
+		if(this.y < 0) this.y = 0;
+		if(this.x > width-this.width) this.x = width-this.width;
+		if(this.y > height-this.height) this.y = height-this.height;
+	}
 };
 
 window.addEventListener("keydown", function(e){
@@ -27,21 +41,13 @@ function game(){
 }
 
 function update(){
-	if(keys[38]) robot.y-=speed;
-	if(keys[40]) robot.y+=speed;
-	if(keys[37]) robot.x-=speed;
-	if(keys[39]) robot.x+=speed;
-
-	if(robot.x < 0) robot.x = 0;
-	if(robot.y < 0) robot.y = 0;
-	if(robot.x > width-robot.width) robot.x = width-robot.width;
-	if(robot.y > height-robot.height) robot.y = height-robot.height;
+	robot.update();
 
 }
 
 function render(){
 	context.clearRect(0, 0, width, height);
-	context.fillRect(robot.x, robot.y, robot.width, robot.height)
+	robot.draw();
 }
 
 setInterval(function(){
