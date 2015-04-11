@@ -72,9 +72,12 @@ var things = [
 			"a fluffy kitten!",
 			"a rotten banana", 
 			"a pile of rusty screws", 
-			"a green mountain bike",
+			"a wobbly unicycle",
 			"a delicious candy bar",
-			"a bunch of wild flowers"
+			"a bunch of wild flowers",
+			"a light switch",
+			"a disposable camera",
+			"a guinea pig named Lola"
 			]
 var boxes = []
 
