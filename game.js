@@ -11,6 +11,7 @@ var robot = {
 	width: 20,
 	height: 20,
 	draw: function(){
+		context.fillStyle = "black"
 		context.fillRect(this.x, this.y, this.width, this.height)
 	},
 	update: function(){
@@ -32,6 +33,7 @@ var box = {
 	width: 20,
 	height: 20,
 	draw: function(){
+		context.fillStyle = "blue"
 		context.fillRect(this.x, this.y, this.width, this.height)
 	}
 };
