@@ -26,6 +26,16 @@ var robot = {
 	}
 };
 
+var box = {
+	x: Math.random() * width,
+	y: Math.random() * height,
+	width: 20,
+	height: 20,
+	draw: function(){
+		context.fillRect(this.x, this.y, this.width, this.height)
+	}
+};
+
 window.addEventListener("keydown", function(e){
 	keys[e.keyCode] = true;
 }, false);
@@ -42,12 +52,12 @@ function game(){
 
 function update(){
 	robot.update();
-
 }
 
 function render(){
 	context.clearRect(0, 0, width, height);
 	robot.draw();
+	box.draw();
 }
 
 setInterval(function(){
