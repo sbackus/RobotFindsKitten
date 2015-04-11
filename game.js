@@ -3,7 +3,7 @@ var context = canvas.getContext("2d");
 
 var keys = [];
 
-var message = "Find the kitten!"
+var message = ""
 
 var width = 500, height = 400, speed = 5
 
@@ -15,6 +15,11 @@ var robot = {
 	draw: function(){
 		context.fillStyle = "black"
 		context.fillRect(this.x, this.y, this.width, this.height)
+		context.fillStyle = "grey"
+		context.fillRect(this.x+3, this.y+14, 13, 4)
+
+		this.draw_eye(this.x+5, this.y+5);
+		this.draw_eye(this.x+15, this.y+5);
 	},
 	update: function(){
 		if(keys[38]) this.y-=speed;
@@ -26,7 +31,13 @@ var robot = {
 		if(this.y < 0) this.y = 0;
 		if(this.x > width-this.width) this.x = width-this.width;
 		if(this.y > height-this.height) this.y = height-this.height;
-	}
+	},
+	draw_eye: function(x,y){
+		context.beginPath();
+    	context.arc(x, y, 3, 0, 2 * Math.PI, false);
+    	context.fillStyle = 'green';
+    	context.fill();
+    }
 };
 
 function getRandomColor() {
