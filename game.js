@@ -3,11 +3,13 @@ var context = canvas.getContext("2d");
 
 var keys = [];
 
+var message = "find the kitten!"
+
 var width = 500, height = 400, speed = 5
 
 var robot = {
-	x: 10,
-	y: 10,
+	x: width/2,
+	y: height/2,
 	width: 20,
 	height: 20,
 	draw: function(){
@@ -70,6 +72,10 @@ function render(){
 	context.clearRect(0, 0, width, height);
 	robot.draw();
 	box.draw();
+
+	context.fillStyle = "black";
+	context.font = "bold 30px helvetica";
+	context.fillText(message, 10, 30);
 }
 
 setInterval(function(){
