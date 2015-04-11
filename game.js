@@ -3,7 +3,7 @@ var context = canvas.getContext("2d");
 
 var keys = [];
 
-var message = "find the kitten!"
+var message = "Find the kitten!"
 
 var width = 500, height = 400, speed = 5
 
@@ -29,22 +29,47 @@ var robot = {
 	}
 };
 
-var box = {
-	x: Math.random() * width,
-	y: Math.random() * height,
-	width: 20,
-	height: 20,
-	draw: function(){
-		context.fillStyle = "blue"
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function box(contents) {
+	this.contents = contents;
+	this.x =  Math.random() * width;
+	this.y =  Math.random() * height;
+	this.width =  10;
+	this.height =  10;
+	this.color = getRandomColor();
+	this.draw =  function(){
+		context.fillStyle = this.color
 		context.fillRect(this.x, this.y, this.width, this.height)
-	},
-	touching: function(other){
+	};
+	this.touching =  function(other){
 		return !(this.x > other.x + other.width ||
 			this.x + this.width < other.x ||
 			this.y > other.y + other.height ||
 			this.y + this.height < other.y);
-	}
+	};
 };
+
+var things = [
+			"a fluffy kitten!",
+			"a rotten banana", 
+			"a pile of rusty screws", 
+			"a green mountain bike",
+			"a delicious candy bar",
+			"a bunch of wild flowers"
+			]
+var boxes = []
+
+things.forEach(function(thing){
+	boxes = boxes.concat(new box(thing));
+});
 
 window.addEventListener("keydown", function(e){
 	keys[e.keyCode] = true;
@@ -62,16 +87,20 @@ function game(){
 
 function update(){
 	robot.update();
-	if (box.touching(robot)) {
-		box.x = Math.random() * width;
-		box.y = Math.random() * height;
-	}
+
+	boxes.forEach(function(box){
+		if (box.touching(robot)){
+			message = "You found " + box.contents;
+		}
+	});
 }
 
 function render(){
 	context.clearRect(0, 0, width, height);
 	robot.draw();
-	box.draw();
+	boxes.forEach(function(box){
+		box.draw();
+	});
 
 	context.fillStyle = "black";
 	context.font = "bold 30px helvetica";
