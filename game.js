@@ -35,6 +35,12 @@ var box = {
 	draw: function(){
 		context.fillStyle = "blue"
 		context.fillRect(this.x, this.y, this.width, this.height)
+	},
+	touching: function(other){
+		return !(this.x > other.x + other.width ||
+			this.x + this.width < other.x ||
+			this.y > other.y + other.height ||
+			this.y + this.height < other.y);
 	}
 };
 
@@ -54,6 +60,10 @@ function game(){
 
 function update(){
 	robot.update();
+	if (box.touching(robot)) {
+		box.x = Math.random() * width;
+		box.y = Math.random() * height;
+	}
 }
 
 function render(){
